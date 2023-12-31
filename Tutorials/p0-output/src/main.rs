@@ -23,6 +23,6 @@ fn main() {
 
         led_pin.set_high().unwrap();
         println!("LED OFF");
-        FreeRtos::delay_ms(1000);
+        FreeRtos::delay_ms(500);
     }
 }
