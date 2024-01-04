@@ -31,18 +31,22 @@ fn main() {
 
     loop {
         let mut buf: [u8; 10] = [0; 10];
+        uart.write(b"Hello").unwrap();
+        // println!("U should've gotten a message");
         match uart.read(&mut buf, NON_BLOCK) {
             Ok(bytes_read) => {
                 if bytes_read > 0 {
-                    let b = buf[0];
-                    cli_buf.push(b);
-                    if b == CR {
-                        match uart.write(&cli_buf) {
-                            Ok(_) => println!("{:?} written", cli_buf),
-                            Err(_) => {}
-                        }
-                        cli_buf.clear();
-                    }
+                    println!("Data! {:#?}", buf);
+
+                    // let b = buf[0];
+                    // cli_buf.push(b);
+                    // if b == CR {
+                    //     match uart.write(&cli_buf) {
+                    //         Ok(_) => println!("{:?} written", cli_buf),
+                    //         Err(_) => {}
+                    //     }
+                    //     cli_buf.clear();
+                    // }
                 }
             }
             Err(_) => {}
